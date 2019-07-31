@@ -14,6 +14,6 @@ export function buildUrl(url: string, params?:any): string {
     }
 
   })
-
+  return url;
 }
 
