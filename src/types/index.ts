@@ -31,7 +31,9 @@ export interface AxiosResponse {
   request: any
 }
 export interface AxiosPromise extends Promise<AxiosResponse> {}
-export interface AxisError extends Error {
+// 错误信息增强
+export interface AxiosError extends Error {
+  isAxiosError: boolean
   config: AxiosRequestConfig
   code?: string | null
   request?: any
