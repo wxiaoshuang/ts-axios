@@ -26,5 +26,15 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
-// 解析返回的headers格式，响应头
-export function parseHeaders(headers: string): void {}
+// 解析返回的headers格式，string -> object
+export function parseHeaders(headers: string): any {
+  let obj = Object.create(null)
+  if (!headers) return obj
+  headers.split('\r\n').forEach(line => {
+    let [key, val] = line.split(':')
+    if (!key) return
+    if (val) val = val.trim()
+    obj[key] = val
+  })
+  return obj
+}

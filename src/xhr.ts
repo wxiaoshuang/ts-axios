@@ -1,4 +1,6 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types/index'
+import { parseHeaders } from './helpers/headers'
+import { transformResponse } from './helpers/data'
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     const { method = 'get', url, data = null, headers, responseType, timeout } = config
@@ -14,8 +16,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       if (request.readyState !== 4) {
         return
       }
-      const responseHeaders = request.getAllResponseHeaders()
+      // 获取所有的响应头,处理成对象
+      const responseHeaders = parseHeaders(request.getAllResponseHeaders())
       const responseData = responseType !== 'text' ? request.response : request.responseText
+      // 封装axios response
       const response: AxiosResponse = {
         data: responseData,
         status: request.status,
