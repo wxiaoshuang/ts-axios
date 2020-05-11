@@ -1,7 +1,10 @@
-import {isPlainObject} from './util'
-export function transformRequest(data: any) : any {
-  if(isPlainObject(data)) {
+/**
+ * 处理请求体数据
+ */
+import { isPlainObject } from './util'
+export function transformRequest(data: any): any {
+  if (isPlainObject(data)) {
     return JSON.stringify(data)
   }
-  return data;
+  return data
 }

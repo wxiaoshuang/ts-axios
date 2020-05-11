@@ -10,18 +10,18 @@ function axios(config: AxiosRequestConfig): AxiosPromise {
 function processConfig(config: AxiosRequestConfig) {
   config.url = transformUrl(config)
   // 这里要先处理headers，再处理data
-  config.headers = transfromHeaders(config)
+  config.headers = transformHeaders(config)
   config.data = transformRequestData(config)
 }
 function transformUrl(config: AxiosRequestConfig): string {
   return buildUrl(config.url, config.params)
 }
-function transformRequestData(config: AxiosRequestConfig) {
-  return transformRequest(config.data)
-}
-function transfromHeaders(config: AxiosRequestConfig) {
+function transformHeaders(config: AxiosRequestConfig) {
   // headers需要有一个默认值
   let { headers = {}, data } = config
   return processHeaders(headers, data)
+}
+function transformRequestData(config: AxiosRequestConfig) {
+  return transformRequest(config.data)
 }
 export default axios
